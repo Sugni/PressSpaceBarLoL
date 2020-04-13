@@ -13,10 +13,11 @@ namespace PressSpaceBarLoL
         private Timer timerBulletMove;
         int verVel = 0;
         int horvel = 0;
-        int bulletStep = 5;
+        private int bulletStep;
 
-        public Bullet()
+        public Bullet(int speed)
         {
+            bulletStep = speed;
             InitializeBullet();
             InitalizeTimerBulletMove();
         }

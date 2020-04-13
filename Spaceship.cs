@@ -10,17 +10,58 @@ namespace PressSpaceBarLoL
 {
     class Spaceship:PictureBox
     {
+
+        private int imageCount = 1;
+
+        //private string engineStatus = "Off";
+
+        private Timer animationTimer = null;
+
+        public string EngineStatus { get; set; } = "Off";
+
         public Spaceship()
         {
             InitializeSpaceship();
+            InitializeAnimationTimer();
         }
+
+        private void InitializeAnimationTimer()
+        {
+            animationTimer = new Timer();
+            animationTimer.Tick += new EventHandler(AnimationTimer_Tick);
+            animationTimer.Interval = 100;
+            animationTimer.Start();
+        }
+
+        private void AnimationTimer_Tick(object sender, EventArgs e)
+        {
+            string imageName = "Rocket" + EngineStatus + imageCount.ToString();
+            this.Image = (Image)Properties.Resources.ResourceManager.GetObject(imageName);
+            imageCount++;
+            if (imageCount == 5)
+            {
+                imageCount = 1;
+            }
+        }
+
 
         private void InitializeSpaceship()
         {
-            this.Width = 60;
-            this.Height = 60;
-            this.BackColor = Color.Gray;
+            this.Width = 40;
+            this.Height = 80;
+            this.BackColor = Color.Transparent;
+            this.SizeMode = PictureBoxSizeMode.StretchImage;
+            this.Image = Properties.Resources.RocketOn1;
+        }
 
+        public void EngineOn()
+        {
+            EngineStatus = "On";
+        }
+
+        public void EngineOff()
+        {
+            EngineStatus = "Off";
         }
     }
 }

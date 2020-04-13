@@ -68,6 +68,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="TheGameOfSpaceBar.resx">
       <DependentUpon>TheGameOfSpaceBar.cs</DependentUpon>
@@ -84,6 +85,30 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="space_battle_sprites\rocket\tile000.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="space_battle_sprites\rocket\tile001.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="space_battle_sprites\rocket\tile002.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="space_battle_sprites\rocket\tile003.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="space_battle_sprites\rocket\tile004.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="space_battle_sprites\rocket\tile005.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="space_battle_sprites\rocket\tile006.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="space_battle_sprites\rocket\tile007.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

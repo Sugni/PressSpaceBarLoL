@@ -38,6 +38,7 @@
             this.Name = "TheGameOfSpaceBar";
             this.Text = "Form1";
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TheGameOfSpaceBar_KeyDown);
+            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TheGameOfSpaceBar_KeyUp);
             this.ResumeLayout(false);
 
         }
