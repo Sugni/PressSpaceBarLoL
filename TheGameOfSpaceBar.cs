@@ -35,22 +35,18 @@ namespace PressSpaceBarLoL
 
         private void EnemyBulletCollision()
         {
-
-            private void EnemyBulletCollision()
+            foreach (Control c in this.Controls)
             {
-                foreach (Control c in this.Controls)
+                if ((string)c.Tag == "enemy")
                 {
-                    if ((string)c.Tag == "enemy")
+                    foreach (Control b in this.Controls)
                     {
-                        foreach (Control b in this.Controls)
+                        if ((string)b.Tag == "bullet")
                         {
-                            if ((string)b.Tag == "bullet")
+                            if (c.Bounds.IntersectsWith(b.Bounds))
                             {
-                                if (c.Bounds.IntersectsWith(b.Bounds))
-                                {
-                                    c.Dispose();
-                                    b.Dispose();
-                                }
+                                c.Dispose();
+                                b.Dispose();
                             }
                         }
                     }
