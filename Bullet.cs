@@ -46,6 +46,7 @@ namespace PressSpaceBarLoL
             this.BackColor = Color.Red;
             this.Width = 10;
             this.Height = 10;
+            this.Tag = "Bullet";
         }
     }
 }

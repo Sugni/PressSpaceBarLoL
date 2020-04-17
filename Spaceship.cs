@@ -13,6 +13,8 @@ namespace PressSpaceBarLoL
 
         private int imageCount = 1;
 
+
+
         //private string engineStatus = "Off";
 
         private Timer animationTimer = null;
@@ -44,7 +46,21 @@ namespace PressSpaceBarLoL
             }
         }
 
-
+        public void FireBullet(TheGameOfSpaceBar battlefield)
+        {
+            Bullet bullet = null;
+            if (EngineStatus == "On")
+            {
+                bullet = new Bullet(15);
+            }
+            else
+            {
+                bullet = new Bullet(5);
+            }
+            bullet.Top = this.Top;
+            bullet.Left = this.Left + (this.Width / 2 - bullet.Width / 2);
+            battlefield.Controls.Add(bullet);
+        }
         private void InitializeSpaceship()
         {
             this.Width = 40;

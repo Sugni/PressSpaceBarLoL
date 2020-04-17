@@ -13,8 +13,11 @@ namespace PressSpaceBarLoL
     public partial class TheGameOfSpaceBar : Form
     {
         Spaceship spaceship = null;
-        Bullet bullet = null;
         Timer mainTimer = null;
+        Timer createEnemies = null;
+        Enemy enemy = null;
+        Random rand = new Random();
+
 
         bool moveLeft = false;
         bool moveRight = false;
@@ -26,6 +29,68 @@ namespace PressSpaceBarLoL
             InitializeComponent();
             InitializeBattlefield();
             InitializeMainTimer();
+            InitializeEnemyCreatorTimer();
+        }
+
+
+        private void EnemyBulletCollision()
+        {
+
+            private void EnemyBulletCollision()
+            {
+                foreach (Control c in this.Controls)
+                {
+                    if ((string)c.Tag == "enemy")
+                    {
+                        foreach (Control b in this.Controls)
+                        {
+                            if ((string)b.Tag == "bullet")
+                            {
+                                if (c.Bounds.IntersectsWith(b.Bounds))
+                                {
+                                    c.Dispose();
+                                    b.Dispose();
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        private void EnemySpaceshipCollision()
+        {
+            foreach(Control ctrl in this.Controls)
+            {
+                if((string)ctrl.Tag == "Enemy" && ctrl.Bounds.IntersectsWith(spaceship.Bounds))
+                {
+                    GameOver();
+                    ctrl.Dispose();
+                    spaceship.Dispose();
+                }
+            }
+        }
+
+        private void GameOver()
+        {
+            mainTimer.Stop();
+            MessageBox.Show("Game Over!");
+        }
+
+        private void InitializeEnemyCreatorTimer()
+        {
+            createEnemies = new Timer();
+            createEnemies.Interval = 1000;
+            createEnemies.Tick += new EventHandler(CreateEnemies_Tick);
+            createEnemies.Start();
+        }
+
+        private void CreateEnemies_Tick(object sender, EventArgs e)
+        {
+            enemy = new Enemy(rand.Next(1, 10), this);
+            enemy.Left = rand.Next(0, ClientRectangle.Width - enemy.Width);
+            enemy.Top = 0 - enemy.Height;
+            this.Controls.Add(enemy);
         }
 
         private void InitializeBattlefield()
@@ -54,28 +119,17 @@ namespace PressSpaceBarLoL
             {
                 spaceship.Left -= 5;
             }
+            EnemyBulletCollision();
+            EnemySpaceshipCollision();
         }
 
-        private void FireBullet()
-        {
-            if(spaceship.EngineStatus == "On")
-            {
-                bullet = new Bullet(15);
-            }
-            else
-            {
-                bullet = new Bullet(5);
-            }
-            bullet.Top = spaceship.Top;
-            bullet.Left = spaceship.Left + (spaceship.Width / 2 - bullet.Width / 2);
-            this.Controls.Add(bullet);
-        }
+
 
         private void TheGameOfSpaceBar_KeyDown(object sender, KeyEventArgs e)
         {
             if(e.KeyCode == Keys.Space && !bulletFired)
             {
-                FireBullet();
+                spaceship.FireBullet(this);
                 bulletFired = true;
             }
             if(e.KeyCode == Keys.Left || e.KeyCode == Keys.A)
